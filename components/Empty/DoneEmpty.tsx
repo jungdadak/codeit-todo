@@ -16,7 +16,7 @@ export default function DoneEmpty() {
         width={240}
         height={220}
         alt="할일없어요?"
-        className="m-auto mt-5 hidden lg:block"
+        className="m-auto mt-5 mb-[20px] hidden lg:block"
       />
       <p className="text-16 p-5">
         할 일이 없어요.
