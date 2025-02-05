@@ -25,18 +25,18 @@ body {
 /* 폰트스타일 컴포넌트화 */
 @layer components {
   .text-20 {
-    @apply font-nanum text-[20px] font-bold;
+    @apply font-nanum text-[20px] font-bold text-slate-900;
   }
 
   .text-18 {
-    @apply font-nanum text-[18px] font-bold;
+    @apply font-nanum text-[18px] font-bold text-slate-900;
   }
 
   .text-16-bold {
-    @apply font-nanum text-[16px] font-bold;
+    @apply font-nanum text-[16px] font-bold text-slate-800;
   }
 
   .text-16 {
-    @apply font-nanum text-[16px] font-normal;
+    @apply font-nanum text-[16px] font-normal text-slate-400;
   }
 }

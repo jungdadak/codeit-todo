@@ -23,9 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       {/* 부드러운 폰트를 위한 안티앨리어스 */}
-      <body className="antialiased bg-slate-200">
+      <body className="antialiased bg-slate-100 ">
         <NavBar />
-        <main className="max-w-7xl">{children}</main>
+        <main className="max-w-7xl p-4 mx-auto">{children}</main>
       </body>
     </html>
   );
