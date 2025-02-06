@@ -96,10 +96,11 @@ export default function ImageUpload({
       <div className="w-full h-[311px] bg-slate-100 border-2 border-dashed border-slate-300 flex justify-center items-center rounded-2xl relative">
         {imageUrl ? (
           <>
-            <img
+            <Image
               src={imageUrl}
               alt="Uploaded"
-              className="w-full h-full object-cover rounded-2xl"
+              fill
+              className="object-cover rounded-2xl"
             />
             <button
               onClick={handleUpload}

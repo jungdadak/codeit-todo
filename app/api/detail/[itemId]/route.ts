@@ -1,7 +1,11 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, type NextRequest } from 'next/server';
 
-// 환경 변수 체크 함수
-function checkEnvVariables() {
+function checkEnvVariables(): {
+  error: boolean;
+  response?: Response;
+  TENANT_ID?: string;
+  API_URL?: string;
+} {
   const TENANT_ID = process.env.TENANT_ID;
   const API_URL = process.env.API_URL;
 
@@ -15,16 +19,19 @@ function checkEnvVariables() {
   return { error: false, TENANT_ID, API_URL };
 }
 
-// GET - Todo 상세 조회
-export async function GET(
-  req: Request,
-  { params }: { params: { itemId: string } }
-) {
+export async function GET(request: NextRequest): Promise<Response> {
   const env = checkEnvVariables();
-  if (env.error) return env.response;
+  if (env.error && env.response) return env.response;
 
   try {
-    const { itemId } = await params;
+    const itemId = request.nextUrl.pathname.split('/').pop(); // URL에서 itemId 추출
+    if (!itemId) {
+      return NextResponse.json(
+        { error: '아이템 ID가 없습니다.' },
+        { status: 400 }
+      );
+    }
+
     const res = await fetch(`${env.API_URL}/${env.TENANT_ID}/items/${itemId}`, {
       cache: 'no-store',
     });
@@ -38,24 +45,25 @@ export async function GET(
 
     const data = await res.json();
     return NextResponse.json(data, { status: 200 });
-  } catch (err) {
+  } catch {
     return NextResponse.json({ error: '서버 오류 발생' }, { status: 500 });
   }
 }
 
-// PATCH - Todo 수정
-
-export async function PATCH(
-  req: Request,
-  { params }: { params: { itemId: string } }
-) {
+export async function PATCH(request: NextRequest): Promise<Response> {
   const env = checkEnvVariables();
-  if (env.error) return env.response;
+  if (env.error && env.response) return env.response;
 
   try {
-    const { itemId } = await params;
-    const numericItemId = parseFloat(itemId); // string을 number로 변환
+    const itemId = request.nextUrl.pathname.split('/').pop(); // URL에서 itemId 추출
+    if (!itemId) {
+      return NextResponse.json(
+        { error: '아이템 ID가 없습니다.' },
+        { status: 400 }
+      );
+    }
 
+    const numericItemId = parseFloat(itemId);
     if (isNaN(numericItemId)) {
       return NextResponse.json(
         { error: '잘못된 아이템 ID 형식' },
@@ -63,7 +71,7 @@ export async function PATCH(
       );
     }
 
-    const body = await req.json();
+    const body = await request.json();
 
     const res = await fetch(
       `${env.API_URL}/${env.TENANT_ID}/items/${numericItemId}`,
@@ -98,16 +106,18 @@ export async function PATCH(
   }
 }
 
-// DELETE - Todo 삭제
-export async function DELETE(
-  req: Request,
-  { params }: { params: { itemId: string } }
-) {
+export async function DELETE(request: NextRequest): Promise<Response> {
   const env = checkEnvVariables();
-  if (env.error) return env.response;
+  if (env.error && env.response) return env.response;
 
   try {
-    const { itemId } = params;
+    const itemId = request.nextUrl.pathname.split('/').pop(); // URL에서 itemId 추출
+    if (!itemId) {
+      return NextResponse.json(
+        { error: '아이템 ID가 없습니다.' },
+        { status: 400 }
+      );
+    }
 
     const res = await fetch(`${env.API_URL}/${env.TENANT_ID}/items/${itemId}`, {
       method: 'DELETE',
@@ -122,6 +132,6 @@ export async function DELETE(
 
     return NextResponse.json({ message: '삭제 완료' }, { status: 200 });
   } catch (err) {
-    return NextResponse.json({ error: '서버 오류 발생' }, { status: 500 });
+    return NextResponse.json({ error: '서버 오류 발생', err }, { status: 500 });
   }
 }

@@ -33,7 +33,7 @@ export async function GET(request: Request) {
     }
 
     return NextResponse.json(parsedData.data, { status: 200 });
-  } catch (err) {
+  } catch {
     return NextResponse.json({ error: '서버 오류 발생' }, { status: 500 });
   }
 }
