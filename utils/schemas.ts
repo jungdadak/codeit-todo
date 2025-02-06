@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { string, z } from 'zod';
 
 /**
  * api/tanentId/items 의 응답 타입을 검증하는 스키마 입니다.
@@ -18,3 +18,15 @@ export const GetAll_ListSchema = z.array(GetAll_ItemSchema);
  */
 export type TodoItem = z.infer<typeof GetAll_ItemSchema>;
 export type TodoItemList = z.infer<typeof GetAll_ListSchema>;
+
+/**
+ * items/itemId 엔드포인트용 스키마 (서버 응답부분)
+ * 상단 스키마 재활용
+ */
+export const Detail_ItemSchema = GetAll_ItemSchema.extend({
+  memo: z.string().nullable(),
+  imageUrl: z.string().nullable(),
+  tenantId: z.string(),
+});
+
+export type DetailItem = z.infer<typeof Detail_ItemSchema>;

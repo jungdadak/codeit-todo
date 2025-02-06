@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import NavBar from '@/components/Nav/Navbar';
+import { Providers } from './provider';
 export const metadata: Metadata = {
   title: 'Andy Lee Todos',
   description: 'Andy Lee 투두앱 입니다.',
@@ -25,7 +26,9 @@ export default function RootLayout({
       {/* 부드러운 폰트를 위한 안티앨리어스 */}
       <body className="antialiased bg-slate-100 ">
         <NavBar />
-        <main className="max-w-7xl p-4 mx-auto">{children}</main>
+        <main className="max-w-7xl p-4 mx-auto">
+          <Providers>{children}</Providers>
+        </main>
       </body>
     </html>
   );

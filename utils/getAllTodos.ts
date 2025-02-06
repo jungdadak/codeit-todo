@@ -15,14 +15,14 @@ export async function getAllTodos(
   const API_URL = process.env.API_URL;
   const TENANT_ID = process.env.TENANT_ID;
 
-  /**
+  /*
    * 클라이언트에게 Tenant_Id , API를 숨기기 위해 환경변수로 지정
    * 환경변수 에러 필터링
    */
   if (!API_URL || !TENANT_ID) {
     return { error: '환경변수 등록 하셨나요' };
   }
-  /**
+  /*
    * 메인페이지 랜더링을 위한 api/{teneantId}/items 엔드포인트에 요청
    *
    */

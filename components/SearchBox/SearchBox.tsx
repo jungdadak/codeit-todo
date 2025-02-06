@@ -1,13 +1,66 @@
 'use client';
-// components/SearchBox/SearchBox.tsx
 import { useState } from 'react';
+import { useToast } from '@/hooks/use-toast';
+import { useRouter } from 'next/navigation';
 
 export default function SearchBox() {
   const [inputValue, setInputValue] = useState('');
+  const { toast } = useToast();
+  const router = useRouter();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    console.log('📌 제출된 값:', inputValue);
+
+    if (inputValue.trim().length < 3) {
+      toast({
+        title: '❌ 오류',
+        description: '3글자 이상 입력하세요!',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/todos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: inputValue }),
+      });
+
+      console.log('📌 서버 응답 상태:', res.status);
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        console.log('❌ 서버 응답 오류:', errorText);
+        throw new Error(errorText);
+      }
+
+      setInputValue('');
+      /**
+       * soft refresh 로 변경사항 반영
+       */
+      router.refresh();
+      toast({
+        title: '✅ 성공',
+        description: '할 일 추가 완료!',
+      });
+    } catch (err) {
+      console.error('❌ 요청 실패:', err);
+      toast({
+        title: '❌ 실패',
+        description: '할 일 추가 실패!',
+        variant: 'destructive',
+      });
+    }
+  };
 
   return (
     <div className="w-full p-1">
-      <form className="w-full flex gap-2 items-center flex-nowrap">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full flex gap-2 items-center flex-nowrap"
+      >
         <input
           type="text"
           value={inputValue}
