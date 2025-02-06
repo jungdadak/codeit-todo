@@ -82,7 +82,7 @@ export default function ButtonGroup({
                    shadow-[4px_4px_0px_rgba(0,0,0,1)] 
                    hover:bg-rose-700 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
       >
-        <Image src="/ic/x.svg" alt="delete" width={16} height={16} />
+        <Image src="/ic/X.svg" alt="delete" width={16} height={16} />
         삭제하기
       </button>
     </div>
