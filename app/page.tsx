@@ -1,5 +1,5 @@
 import SearchBox from '@/components/SearchBox/SearchBox';
-import TodoSection from '@/components/TodoSection';
+import TodoSection from '@/components/Todosection';
 import Image from 'next/image';
 import { Suspense } from 'react';
 
