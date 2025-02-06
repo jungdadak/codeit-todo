@@ -13,16 +13,19 @@ export function useTodoActions() {
 
   const updateTodoStatus = async (todo: TodoItem) => {
     try {
+      // 해당 todo의 최신 데이터를 먼저 fetch
+      const getRes = await fetch(`/api/detail/${todo.id}`);
+      if (!getRes.ok) throw new Error('최신 데이터 조회 실패');
+      const currentData = await getRes.json();
+
       const res = await fetch(`/api/detail/${todo.id}`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: todo.name,
-          memo: todo.memo || '',
-          imageUrl: todo.imageUrl || '',
-          isCompleted: !todo.isCompleted,
+          name: currentData.name,
+          memo: currentData.memo || '',
+          imageUrl: currentData.imageUrl || '',
+          isCompleted: !currentData.isCompleted,
         }),
       });
 

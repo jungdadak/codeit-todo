@@ -67,8 +67,17 @@ export default function DetailPageClient({
   return (
     <div className="w-full h-screen p-2">
       <div className="w-full mb-4">
-        <div className="bg-slate-100 rounded-3xl flex items-center justify-center border-2 border-slate-900 py-3 px-4">
-          <Image src="/ic/todo.svg" alt="todo-list" width={32} height={32} />
+        <div
+          className={`${
+            todoData.isCompleted ? 'bg-violet-100' : 'bg-slate-100'
+          } rounded-3xl flex items-center justify-center border-2 border-slate-900 py-3 px-4`}
+        >
+          <Image
+            src={todoData.isCompleted ? '/ic/done.svg' : '/ic/todo.svg'}
+            alt="todo-list"
+            width={32}
+            height={32}
+          />
           <h1 className="text-xl ml-4 underline">{todoData.name}</h1>
         </div>
       </div>
