@@ -15,7 +15,7 @@ body {
   }
 
   .text-18 {
-    @apply font-nanum text-[18px] font-bold text-slate-900;
+    @apply font-nanum text-[18px] text-slate-900;
   }
 
   .text-16-bold {

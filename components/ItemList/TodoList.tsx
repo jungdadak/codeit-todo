@@ -1,5 +1,6 @@
 import { TodoItem } from '@/utils/schemas';
 import Image from 'next/image';
+import Link from 'next/link';
 
 /**
  * props 타입은 zod infer타입 재사용
@@ -21,7 +22,9 @@ export default function TodoList({ todos }: TodoListProps) {
         className="w-full m-3 p-3 bg-slate-100 rounded-full flex items-center border-2 border-slate-900 gap-4"
       >
         <Image src={'/ic/todo.svg'} alt="todo-list" width={32} height={32} />
-        <p>{a.name}</p>
+        <Link href={`/detail/${a.id}`}>
+          <p>{a.name}</p>
+        </Link>
       </div>
     );
   });
