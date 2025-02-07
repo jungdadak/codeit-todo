@@ -1,6 +1,10 @@
 // app/api/images/upload/route.ts
 import { NextResponse } from 'next/server';
 
+/**
+ * 실제로 이미지를 업로드하는 부분 tenantId는 api에서만 핸들링 합니다.
+ * (유저의 조작으로 다른 tenant에 crud 동작 방지)
+ */
 export async function POST(req: Request) {
   const TENANT_ID = process.env.TENANT_ID;
   const API_URL = process.env.API_URL;

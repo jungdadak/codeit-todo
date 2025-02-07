@@ -11,6 +11,7 @@ interface NameInputProps {
   onToggleCompleted: () => void;
 }
 
+// 디테일 페이지 상단의 name, isCompleted 관련 변경하는 컴포넌트 입니다.
 const NameInput = ({
   initialName,
   isCompleted,
@@ -30,6 +31,9 @@ const NameInput = ({
     }
   }, [isEditing]);
 
+  /**
+   * 글자수 변경함수 입니다. 글자수 제한도 체크합니다.
+   */
   const handleNameChange = (value: string) => {
     setName(value);
     if (value.length < 3) {
@@ -40,6 +44,10 @@ const NameInput = ({
     onNameChange(value);
   };
 
+  /**
+   * 키보드로 엔터키로 입력하거나 벗어나는 경우 입력모드를 비활성화 합니다.
+   * name은 글자수 제한이 있으므로 충족하지 않을 경우 변경을 취소합니다.
+   */
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !error && name.length >= 3) {
       setIsEditing(false);
@@ -52,6 +60,9 @@ const NameInput = ({
     }
   };
 
+  /**
+   * 글자수를 검증하고 이상이 없는 경우 편집모드를 취소하고 저장합니다.
+   */
   const handleBlur = () => {
     if (!error && name.length >= 3) {
       setIsEditing(false);

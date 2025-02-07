@@ -1,15 +1,13 @@
 'use client';
-
+//보일러플레이트
 import { Toaster } from '@/components/ui/toaster';
-import { ToastProvider } from '@/components/ui/toast'; // ✅ ToastProvider 추가
+import { ToastProvider } from '@/components/ui/toast';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ToastProvider>
-      {' '}
-      {/* ✅ ToastProvider로 감싸기 */}
       {children}
-      <Toaster /> {/* ✅ Toast 메시지 UI */}
+      <Toaster />
     </ToastProvider>
   );
 }

@@ -1,5 +1,15 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
+/**
+ * 백엔드 api 스펙중 itemId가 포함된 엔드포인트에 대한 함수들을 모아두었습니다.
+ * get, patch, delete 메서드를 포함합니다
+ * create의 경우 itemId가 아닌 다른 api 엔드포인트이므로 정의하지 않았습니다. (todos/route.ts에 존재)
+ */
+
+/**
+ * 보안상 tenantId, api주소는 env에 저장해 둡니다.
+ * env파일이 readable 한지 체크합니다.
+ */
 function checkEnvVariables(): {
   error: boolean;
   response?: Response;
@@ -19,6 +29,7 @@ function checkEnvVariables(): {
   return { error: false, TENANT_ID, API_URL };
 }
 
+//detail item (memo, imgurl) 을 포함한 세부 조회 api 입니다.
 export async function GET(request: NextRequest): Promise<Response> {
   const env = checkEnvVariables();
   if (env.error && env.response) return env.response;
@@ -50,6 +61,7 @@ export async function GET(request: NextRequest): Promise<Response> {
   }
 }
 
+// todo 업데이트 엔드포인트 입니다. 모든 필드가 포함되어야 합니다.
 export async function PATCH(request: NextRequest): Promise<Response> {
   const env = checkEnvVariables();
   if (env.error && env.response) return env.response;
@@ -106,6 +118,7 @@ export async function PATCH(request: NextRequest): Promise<Response> {
   }
 }
 
+// todo item 삭제 핸들러 입니다. itemId를 기반으로 삭제 요청을 수행합니다.
 export async function DELETE(request: NextRequest): Promise<Response> {
   const env = checkEnvVariables();
   if (env.error && env.response) return env.response;

@@ -8,6 +8,12 @@ interface ImageUploadProps {
   onImageChange: (imageUrl: string) => void;
 }
 
+/**
+ * 이미지 업로드 컴포넌트 입니다.
+ * 이미지가 이름이 영어로 이루어져 있는지 정규식으로 검증합니다.
+ * filesize가 5mb가 넘지 않는지 검증합니다.
+ *
+ */
 export default function ImageUpload({
   initialImage,
   onImageChange,
@@ -34,7 +40,7 @@ export default function ImageUpload({
       const file = (e.target as HTMLInputElement).files?.[0];
       if (!file) return;
 
-      // 파일명 영문 검증
+      // 파일명 영문 검증함수 호출
       if (!isEnglishFilename(file.name)) {
         toast({
           variant: 'destructive',
@@ -64,6 +70,11 @@ export default function ImageUpload({
 
       setIsUploading(true);
 
+      /**
+       * swagger에 명시된대로 multipartFormdata로 이미지파일을 업로드 합니다.
+       * (binary)
+       */
+
       try {
         const formData = new FormData();
         formData.append('image', file);
@@ -84,6 +95,7 @@ export default function ImageUpload({
           throw new Error('이미지 URL을 받지 못했습니다.');
         }
 
+        // 응답이 성공한 경우 imageUrl스트링을 저장합니다. 부모state를 변경합니다.
         setImageUrl(data.imageUrl);
         onImageChange(data.imageUrl);
 

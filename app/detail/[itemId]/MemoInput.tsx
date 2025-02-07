@@ -2,11 +2,15 @@
 
 import { useState, useEffect, useRef } from 'react';
 
+// 메모 props 타입
 interface MemoInputProps {
   initialMemo: string | null;
   onChange: (memo: string) => void;
 }
 
+/**
+ * 메모 부분 디스플레이, 변경이 모두 가능한 메모 컴포넌트 입니다.
+ */
 export default function MemoInput({ initialMemo, onChange }: MemoInputProps) {
   const [text, setText] = useState(initialMemo || '');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
