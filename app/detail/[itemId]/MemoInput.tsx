@@ -47,10 +47,7 @@ export default function MemoInput({ initialMemo, onChange }: MemoInputProps) {
             value={text}
             onChange={handleChange}
             placeholder="메모를 추가해 보세요"
-            className="w-full max-h-[200px] bg-transparent resize-none text-center outline-none overflow-y-auto placeholder:text-gray-400"
-            style={{
-              height: 'auto',
-            }}
+            className="w-full mt-10 text-16-md max-h-[210px] bg-transparent resize-none text-center outline-none overflow-y-auto placeholder:text-slate-400"
           />
         </div>
       </div>
