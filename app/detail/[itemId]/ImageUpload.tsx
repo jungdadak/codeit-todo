@@ -19,6 +19,10 @@ export default function ImageUpload({
   const [isUploading, setIsUploading] = useState(false);
   const { toast } = useToast();
 
+  const isEnglishFilename = (filename: string) => {
+    return /^[A-Za-z0-9._-]+$/.test(filename);
+  };
+
   const handleUpload = async (e: React.MouseEvent) => {
     e.preventDefault();
 
@@ -30,7 +34,18 @@ export default function ImageUpload({
       const file = (e.target as HTMLInputElement).files?.[0];
       if (!file) return;
 
-      if (file.size > 5 * 1024 * 1024) {
+      // 파일명 영문 검증
+      if (!isEnglishFilename(file.name)) {
+        toast({
+          variant: 'destructive',
+          description: '파일명은 영문만 사용 가능합니다.',
+        });
+        return;
+      }
+
+      // 파일 크기 검증 (5MB)
+      const MAX_FILE_SIZE = 5 * 1024 * 1024; //
+      if (file.size > MAX_FILE_SIZE) {
         toast({
           variant: 'destructive',
           description: '파일 크기는 5MB 이하여야 합니다.',
@@ -38,6 +53,7 @@ export default function ImageUpload({
         return;
       }
 
+      // 이미지 타입 검증
       if (!file.type.startsWith('image/')) {
         toast({
           variant: 'destructive',

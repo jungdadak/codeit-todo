@@ -23,9 +23,11 @@ export default function ButtonGroup({
       if (onSave) {
         await onSave();
         toast({
-          description: '수정이 완료되었습니다.',
+          description: '수정이 완료되었습니다. \n 홈페이지로 이동합니다.',
         });
-        router.refresh();
+        setTimeout(() => {
+          router.push('/');
+        }, 800);
       }
     } catch (error) {
       console.error('Error:', error);
