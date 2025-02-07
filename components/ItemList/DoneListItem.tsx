@@ -21,7 +21,7 @@ export default function DoneListItem({ todo }: DoneListItemProps) {
         <Image src="/ic/done.svg" alt="mark as todo" width={32} height={32} />
       </button>
       <Link href={`/detail/${todo.id}`}>
-        <p>{todo.name}</p>
+        <p className="line-through">{todo.name}</p>
       </Link>
     </div>
   );
