@@ -77,7 +77,7 @@ export default function ButtonGroup({
       <button
         onClick={handleSave}
         className={`btn-base ${
-          hasChanges ? 'bg-lime-400' : 'bg-slate-200'
+          hasChanges ? 'bg-lime-300' : 'bg-slate-200'
         } btn-save`}
       >
         <Image src="/ic/check.svg" alt="check" width={16} height={16} />

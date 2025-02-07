@@ -121,7 +121,7 @@ export default function ImageUpload({
             <button
               onClick={handleUpload}
               disabled={isUploading}
-              className="absolute bottom-4 right-4 bg-slate-700/70 border-2 border-black p-2 rounded-full shadow-md hover:bg-lime-300 "
+              className="absolute bottom-4 right-4 p-3 bg-slate-700/70 border-2 border-black p-2 rounded-full shadow-md hover:bg-lime-300 "
             >
               <Image src="/ic/edit.svg" alt="edit" width={24} height={24} />
             </button>

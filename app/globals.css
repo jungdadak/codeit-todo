@@ -13,6 +13,9 @@ body {
   .text-20 {
     @apply font-nanum text-[20px] font-bold text-slate-900;
   }
+  .text-18-extra {
+    @apply font-nanum text-[18px] font-black text-slate-900;
+  }
   .text-18-bold {
     @apply font-nanum text-[18px] font-bold text-slate-900;
   }
@@ -36,7 +39,7 @@ body {
   }
 
   .btn-delete {
-    @apply bg-rose-600 border-black text-white text-18-bold hover:bg-rose-700;
+    @apply bg-rose-500 border-black text-white text-18-bold hover:bg-rose-700;
   }
 }
 @layer base {

@@ -34,12 +34,12 @@ export default function MemoInput({ initialMemo, onChange }: MemoInputProps) {
   return (
     <div className="w-full">
       <div
-        className="w-full h-[311px] bg-cover bg-center rounded-2xl shadow-md mb-4 relative"
+        className="w-full h-[311px] bg-cover bg-center rounded-3xl mb-4 relative"
         style={{ backgroundImage: 'url(/img/memo.png)' }}
       >
-        <h3 className="absolute top-4 left-1/2 transform -translate-x-1/2 text-yellow-800 text-18-bold">
+        <p className="absolute top-4 left-1/2 transform -translate-x-1/2 text-yellow-800 text-18-extra">
           Memo
-        </h3>
+        </p>
 
         <div className="absolute inset-0 flex items-center justify-center p-6">
           <textarea
