@@ -7,7 +7,7 @@ TenantId 를 클라이언트에게 숨기기 위해 노력하였습니다.
 
 ## 🔗 배포 링크
 
-[배포 링크](https://codeit-todo-mu.vercel.app/)
+[codeit-todo (vercel)](https://codeit-todo-mu.vercel.app/)
 
 ## 🛠 사용 스택
 
