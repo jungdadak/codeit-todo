@@ -12,7 +12,7 @@ export default async function DetailPage({
 }) {
   // await를 사용하여 params를 언래핑합니다.
   const { itemId } = await params;
-  const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL;
 
   try {
     const res = await fetch(`${BASE_URL}/api/detail/${itemId}`, {
