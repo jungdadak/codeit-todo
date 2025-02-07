@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
 import ImageUpload from './ImageUpload';
 import MemoInput from './MemoInput';
