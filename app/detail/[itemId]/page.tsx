@@ -3,8 +3,10 @@ import { notFound } from 'next/navigation';
 import DetailPageClient from './DetailPageClient';
 import type { DetailItem } from '@/utils/schemas';
 
-// 서버 컴포넌트에서는 params가 Promise 형태로 넘어오므로,
-// props 타입을 Promise<{ itemId: string }>로 명시합니다.
+/**
+ * 서버 컴포넌트에서는 params가 Promise 형태로 넘어오므로,
+ * props 타입을 Promise<{ itemId: string }>로 명시합니다.
+ */
 export default async function DetailPage({
   params,
 }: {

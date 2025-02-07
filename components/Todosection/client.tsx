@@ -87,7 +87,7 @@ export default function TodoSectionClient({
         <DoneList todos={filteredTodos} />
       )}
 
-      <div ref={ref} className="h-20">
+      <div ref={ref} className="h-10">
         {' '}
         {/* 높이를 더 크게 */}
         {isFetchingNextPage && (
