@@ -3,6 +3,8 @@ import TodoSection from '@/components/Todosection';
 import Image from 'next/image';
 import { Suspense } from 'react';
 
+//이전 데이터를 캐시하여
+
 function TodoListSkeleton() {
   return (
     <div className="animate-pulse">

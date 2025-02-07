@@ -28,7 +28,8 @@ export async function getAllTodos(
    */
   try {
     const res = await fetch(
-      `${API_URL}/${TENANT_ID}/items?page=${page}&pageSize=${pageSize}`
+      `${API_URL}/${TENANT_ID}/items?page=${page}&pageSize=${pageSize}`,
+      { cache: 'no-store' }
     );
     if (!res.ok) {
       return { error: `API 요청 실패: ${res.status}` };
