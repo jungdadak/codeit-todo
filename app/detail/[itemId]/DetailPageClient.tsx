@@ -24,6 +24,9 @@ export default function DetailPageClient({
   const [name, setName] = useState<string>(initialData.name);
   const [memo, setMemo] = useState<string | null>(initialData.memo);
   const [imageUrl, setImageUrl] = useState<string | null>(initialData.imageUrl);
+  const [isCompleted, setIsCompleted] = useState<boolean>(
+    initialData.isCompleted
+  );
   const { toast } = useToast();
 
   /**변경 사항을 감지하는 변수: 기존 데이터에서 만든 state필드에 변경이 감지시 true반환합니다.
@@ -32,7 +35,8 @@ export default function DetailPageClient({
   const hasChanges =
     memo !== todoData.memo ||
     imageUrl !== todoData.imageUrl ||
-    name !== todoData.name;
+    name !== todoData.name ||
+    isCompleted !== todoData.isCompleted;
 
   /**
    * 수정사항을 저장할때 사용되는 비동기 함수
@@ -45,7 +49,7 @@ export default function DetailPageClient({
         name: name,
         memo: memo || '',
         imageUrl: imageUrl || '',
-        isCompleted: todoData.isCompleted, //completed 부분은 세부항목에서 변경x
+        isCompleted: isCompleted,
       };
 
       const res = await fetch(`/api/detail/${todoData.id}`, {
@@ -83,15 +87,23 @@ export default function DetailPageClient({
     }
   };
 
+  /**
+   * detail 에서 iscompleted의 경우 아이콘과 배경이 변경되어야 하기에 따로 patch
+   */
+  const handleToggleCompleted = () => {
+    setIsCompleted(!isCompleted); // UI 상태만 업데이트
+  };
+
   return (
     <div className="w-full h-screen p-2">
       <div className="w-full mb-4">
         <NameInput
           initialName={name}
-          isCompleted={todoData.isCompleted}
+          isCompleted={isCompleted}
           onNameChange={setName}
           // name은 3글자 이상이어야 하기에 포커스 잃을 경우 자동 저장용 props로 넘겨줍니다.
           onBlurSave={handleSave}
+          onToggleCompleted={handleToggleCompleted}
         />
       </div>
 

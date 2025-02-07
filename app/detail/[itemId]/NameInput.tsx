@@ -2,17 +2,20 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
 
+//props 타입정의
 interface NameInputProps {
   initialName: string;
   isCompleted: boolean;
   onNameChange: (name: string) => void;
   onBlurSave?: () => void;
+  onToggleCompleted: () => void;
 }
 
 const NameInput = ({
   initialName,
   isCompleted,
   onNameChange,
+  onToggleCompleted,
   onBlurSave,
 }: NameInputProps) => {
   const [name, setName] = useState(initialName);
@@ -76,6 +79,8 @@ const NameInput = ({
           alt="todo-list"
           width={32}
           height={32}
+          className="cursor-pointer"
+          onClick={onToggleCompleted}
         />
         {isEditing ? (
           <input

@@ -3,14 +3,25 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@/hooks/use-toast';
 import { TodoItem } from '@/utils/schemas';
 
+/**
+ * 할 일(Todo) 관련된 액션을 관리하는 커스텀 훅
+ * 백엔드 api와 통신하는 nextjs api에 연결시 호출하여 사용합니다.
+ */
 export function useTodoActions() {
   const queryClient = useQueryClient();
   const { toast } = useToast();
 
+  /**
+   * `todos` 키를 가진 캐시 데이터를 무효화하여 최신 데이터를 다시 불러오도록 함
+   */
   const invalidateTodos = () => {
     queryClient.invalidateQueries({ queryKey: ['todos'] });
   };
 
+  /**
+   * 할 일의 완료 상태를 변경하는 함수
+   * @param todo 변경할 할 일 아이템
+   */
   const updateTodoStatus = async (todo: TodoItem) => {
     try {
       // 해당 todo의 최신 데이터를 먼저 fetch
@@ -30,7 +41,7 @@ export function useTodoActions() {
       });
 
       if (!res.ok) throw new Error('상태 변경 실패');
-
+      // 변경된 데이터를 다시 불러오기 위해 캐시 무효화
       invalidateTodos();
 
       toast({
@@ -46,6 +57,10 @@ export function useTodoActions() {
     }
   };
 
+  /**
+   * 할 일을 삭제하는 함수
+   * @param todoId 삭제할 할 일의 ID
+   */
   const deleteTodo = async (todoId: number) => {
     try {
       const res = await fetch(`/api/detail/${todoId}`, {
@@ -67,6 +82,10 @@ export function useTodoActions() {
     }
   };
 
+  /**
+   * 새로운 할 일을 생성하는 함수
+   * @param name 새로 추가할 할 일의 이름
+   */
   const createTodo = async (name: string) => {
     try {
       const res = await fetch('/api/todos', {
