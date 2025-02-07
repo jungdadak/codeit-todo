@@ -27,6 +27,17 @@ body {
   .text-16 {
     @apply font-nanum text-[16px] font-normal text-slate-400;
   }
+  .btn-base {
+    @apply relative w-52 h-16 flex justify-center items-center gap-2 px-6 py-2.5 rounded-full border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none;
+  }
+
+  .btn-save {
+    @apply border-black text-black text-18-bold hover:bg-opacity-90;
+  }
+
+  .btn-delete {
+    @apply bg-rose-600 border-black text-white text-18-bold hover:bg-rose-700;
+  }
 }
 @layer base {
   :root {

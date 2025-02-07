@@ -4,6 +4,15 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 
+/**
+ * 버튼은 tailwind base components로 중복 스타일을 재활용 했습니다.
+ * 수정 버튼은 setTimeout으로 수정이 적용된 것을 잠시 확인시키고 홈페이지로 리디렉션 합니다.
+ */
+
+/**
+ * patch, delete 모두 itemId 기반이기에 정의
+ * 수정하기 버튼은 change가 생길 경우 색이 바뀌기 때문에 hasChanges 추가
+ */
 interface ButtonGroupProps {
   todoId: number;
   hasChanges: boolean;
@@ -27,7 +36,7 @@ export default function ButtonGroup({
         });
         setTimeout(() => {
           router.push('/');
-        }, 800);
+        }, 900);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -67,23 +76,15 @@ export default function ButtonGroup({
     <div className="flex justify-center gap-4 lg:justify-end">
       <button
         onClick={handleSave}
-        className={`relative w-52 justify-center flex items-center gap-2 px-6 py-2.5 rounded-full 
-                   border-2 border-black text-black text-18-bold
-                   shadow-[4px_4px_0px_rgba(0,0,0,1)] 
-                   hover:bg-opacity-90 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none
-                   ${hasChanges ? 'bg-lime-400' : 'bg-slate-200'}`}
+        className={`btn-base ${
+          hasChanges ? 'bg-lime-400' : 'bg-slate-200'
+        } btn-save`}
       >
         <Image src="/ic/check.svg" alt="check" width={16} height={16} />
         수정 완료
       </button>
 
-      <button
-        onClick={handleDelete}
-        className="relative w-52 flex justify-center items-center gap-2 px-6 py-2.5 rounded-full 
-                   bg-rose-600 border-2 border-black text-white text-18-bold
-                   shadow-[4px_4px_0px_rgba(0,0,0,1)] 
-                   hover:bg-rose-700 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
-      >
+      <button onClick={handleDelete} className="btn-base btn-delete">
         <Image src="/ic/X.svg" alt="delete" width={16} height={16} />
         삭제하기
       </button>
